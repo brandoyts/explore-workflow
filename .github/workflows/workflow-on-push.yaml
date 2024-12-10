@@ -1,0 +1,39 @@
+name: Workflow on push
+
+on:
+  push:
+    branches:
+      - master
+      - development
+
+jobs:
+  lint-stage:
+    name: Lint stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: lint code
+        run: echo "linting in progress..."
+      - name: lint completion
+        run: echo "linting complete!"
+
+  build:
+    name: Build application
+    needs:
+      - lint-stage
+    runs-on: ubuntu-latest
+    steps:
+      - name: build application
+        run: echo "application is currently building"
+      - name: build complete
+        run: echo "build successfully"
+
+  deploy:
+    name: Deploy application
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy application
+        run: echo "deploying..."
+      - name: complete
+        run: echo "app has been deployed!"
